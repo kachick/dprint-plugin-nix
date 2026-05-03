@@ -1,0 +1,48 @@
+# Nix sandbox build is much slow and cannot reuse crate cache. So this workflow just uses the devshell likely local development
+name: CI
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+    branches: [main]
+    paths:
+      - '.github/workflows/**'
+      - '**.nix'
+      - 'flake.*'
+      - '**.rs'
+      - 'Cargo.*'
+      - 'Taskfile.yml'
+  pull_request:
+    paths:
+      - '.github/workflows/**'
+      - '**.nix'
+      - 'flake.*'
+      - '**.rs'
+      - 'Cargo.*'
+      - 'Taskfile.yml'
+  schedule:
+    - cron: '42 1 * * *'
+  workflow_dispatch:
+
+jobs:
+  tasks:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: cachix/install-nix-action@ab739621df7a23f52766f9ccc97f38da6b7af14f
+        with:
+          extra_nix_config: |
+            sandbox = true
+            accept-flake-config = true
+      - uses: actions/cache@v5
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            target/
+          key: ${{ runner.os }}-flake-${{ hashFiles('flake.lock') }}-cargo-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: ${{ runner.os }}-flake-${{ hashFiles('flake.lock') }}-
+      - run: nix develop --command task
