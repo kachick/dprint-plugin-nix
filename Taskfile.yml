@@ -40,6 +40,8 @@ tasks:
   test-e2e:
     deps:
       - test-e2e-default
+      - test-e2e-all
+      - test-e2e-with_global_config
   test-e2e-*:
     deps:
       - build
@@ -58,11 +60,13 @@ tasks:
   bump-fixtures:
     deps:
       - bump-fixtures-default
+      - bump-fixtures-all
+      - bump-fixtures-with_global_config
   fmt:
     cmds:
       - cargo fmt
       - dprint fmt
-      - git ls-files '*.nix' | xargs nixfmt
+      - git ls-files '*.nix' ':!:tests' | xargs nixfmt
   lint:
     cmds:
       - cargo clippy -- --deny warnings
@@ -71,7 +75,7 @@ tasks:
       - typos . .github .vscode
       - zizmor .
       # nix fmt doesn't have check: https://github.com/NixOS/nix/issues/6918
-      - git ls-files '*.nix' | xargs nixfmt --check
+      - git ls-files '*.nix' ':!:tests' | xargs nixfmt --check
       - git ls-files | xargs nix run github:kachick/selfup/v1.3.1 -- list -check
   schema:
     cmds:
