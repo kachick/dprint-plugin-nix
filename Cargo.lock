@@ -96,16 +96,15 @@ checksum = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
 
 [[package]]
 name = "compact_str"
-version = "0.9.0"
+version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3fdb1325a1cece981e8a296ab8f0f9b63ae357bd0784a9faaf548cc7b480707a"
+checksum = "79fcda08c33bb58b97008b2cdada6622500e949e060f5913361763121abd2416"
 dependencies = [
  "castaway",
  "cfg-if",
  "itoa",
- "rustversion",
- "ryu",
  "static_assertions",
+ "zmij",
 ]
 
 [[package]]
@@ -358,9 +357,9 @@ checksum = "c2a86d3146ed3995b5913c414f6664344b9617457320782e64f0bb44afd49d74"
 
 [[package]]
 name = "nixfmt_rs"
-version = "0.2.0"
+version = "0.5.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6327ac4a54971799fcba60187bbf9707a33181f76798efa14ede90a67fb64a9b"
+checksum = "a79a3d2c5fb02436a3bbc5ef251bfc6a06cd631e1f5aea594f0dad83c95e2a65"
 dependencies = [
  "compact_str",
  "memchr",
@@ -595,12 +594,6 @@ name = "rustversion"
 version = "1.0.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b39cdef0fa800fc44525c84ccb54a029961a8215f9619753635a9c0d2538d46d"
-
-[[package]]
-name = "ryu"
-version = "1.0.23"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9774ba4a74de5f7b1c1451ed6cd5285a32eddb5cccb8cc655a4e50009e06477f"
 
 [[package]]
 name = "schemagen"
