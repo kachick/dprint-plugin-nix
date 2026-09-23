@@ -14,6 +14,7 @@ tasks:
   build: # Prefer cargo cache rather than go-task cache feature
     env:
       SKIP_BUILD: 'false' # Don't use "$CI" for this purpose
+      CARGO_BUILD_TARGET: 'wasm32-unknown-unknown'
     status:
       - |
         [ "$SKIP_BUILD" == 'true' ]
@@ -26,9 +27,19 @@ tasks:
       - lint
   test:
     deps:
+      - test-unit
+      - test-e2e
+  test-unit:
+    env:
+      SKIP_BUILD: 'false'
+    status:
+      - |
+        [ "$SKIP_BUILD" == 'true' ]
+    cmds:
+      - cargo test --workspace
+  test-e2e:
+    deps:
       - test-e2e-default
-    #   - test-e2e-all
-    #   - test-e2e-with_global_config
   test-e2e-*:
     deps:
       - build
