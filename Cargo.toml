@@ -10,10 +10,13 @@ description = "dprint plugin for Nix formatting using nixfmt"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[features]
+schema = ["dep:schemars"]
+
 [dependencies]
 dprint-core = { version = "0.69.1", features = ["wasm"] }
 nixfmt_rs = { version = "0.2.0", default-features = false }
-schemars = "1.2.1"
+schemars = { version = "1.2.1", optional = true }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0", features = ["preserve_order"] }
 
