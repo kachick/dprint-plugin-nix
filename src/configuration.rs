@@ -5,6 +5,13 @@ use serde::Serialize;
 #[derive(Clone, Serialize)]
 #[cfg_attr(feature = "schema", derive(JsonSchema))]
 #[serde(rename_all = "camelCase")]
+// NOTE:
+// dprint is a customizable formatter platform. We should expose options here
+// when upstream `nixfmt_rs` provides new formatting settings.
+//
+// In particular, we want to support `strict` mode once it becomes available.
+// As of nixfmt_rs 0.5.0, the upstream CLI accepts `--strict` as a no-op,
+// and the library API does not support it yet.
 pub struct Configuration {
     pub line_width: u32,
     pub indent_width: u8,
