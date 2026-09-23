@@ -5,7 +5,7 @@
 ## Installation
 
 ```bash
-dprint config add 'kachick/nix'
+dprint add kachick/nix
 ```
 
 ## Configuration
@@ -30,24 +30,44 @@ Customize if necessary
 }
 ```
 
-In nix fmt, Replace nixfmt-tree with dprint
+## Tips
+
+To format Nix code block in markdown, use `tags` option in official plugin.
+
+```bash
+dprint add markdown
+```
+
+```json
+{
+  "markdown": {
+    "tags": {
+      "nix": "nix"
+    }
+  }
+}
+```
+
+Runs on `nix fmt`, Replace nixfmt-tree with dprint
 
 ```nix
-formatter = forAllSystems (
-  system:
-  let
-    pkgs = nixpkgs.legacyPackages.${system};
-  in
-  pkgs.writeShellApplication {
-    name = "dprint-fmt";
-    runtimeInputs = with pkgs; [
-      dprint
-    ];
-    text = ''
-      dprint fmt "$@"
-    '';
-  }
-);
+{
+  formatter = forAllSystems (
+    system:
+    let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    pkgs.writeShellApplication {
+      name = "dprint-fmt";
+      runtimeInputs = with pkgs; [
+        dprint
+      ];
+      text = ''
+        dprint fmt "$@"
+      '';
+    }
+  );
+}
 ```
 
 ## Limitation
@@ -60,6 +80,7 @@ Please do not use it for nixpkgs or [NixOS/](https://github.com/NixOS/) contribu
 - I prefer running formatters through dprint WASM plugins
 - [`nix fmt` doesn't have check option](https://github.com/NixOS/nix/issues/6918)
 - nixfmt needs treefmt (nixfmt-tree) to target Nix files in directories
+- Format Nix codeblock with the [markdown plugin](https://github.com/dprint/dprint-plugin-markdown)
 
 ## Acknowledgments
 
