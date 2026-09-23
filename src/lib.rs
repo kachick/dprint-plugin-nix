@@ -216,4 +216,28 @@ mod tests {
         let result = handler.format(request, |_| unreachable!());
         assert!(result.is_err());
     }
+
+    #[test]
+    fn test_format_with_directive() {
+        let mut handler = NixPluginHandler;
+        let resolve_result =
+            handler.resolve_config(ConfigKeyMap::new(), &GlobalConfiguration::default());
+        let cancellation_token = NullCancellationToken;
+        let input = "{\n  a   =   1;\n/*nixfmt:disable*/\n  b    =    2;\n/*nixfmt:enable*/\n  c   =   3;\n}\n";
+        let request = SyncFormatRequest {
+            file_path: &PathBuf::from("test.nix"),
+            file_bytes: input.as_bytes().to_vec(),
+            config_id: FormatConfigId::from_raw(1),
+            config: &resolve_result.config,
+            range: None,
+            token: &cancellation_token,
+        };
+        let formatted = handler.format(request, |_| unreachable!()).unwrap();
+        assert!(formatted.is_some());
+        let formatted_str = String::from_utf8(formatted.unwrap()).unwrap();
+        assert_eq!(
+            formatted_str,
+            "{\n  a = 1;\n/*nixfmt:disable*/\n  b    =    2;\n/*nixfmt:enable*/\n  c = 3;\n}\n"
+        );
+    }
 }
