@@ -10,21 +10,21 @@ pub mod configuration;
 use configuration::Configuration;
 
 #[derive(Default)]
-pub struct NixfmtPluginHandler;
+pub struct NixPluginHandler;
 
-impl SyncPluginHandler<Configuration> for NixfmtPluginHandler {
+impl SyncPluginHandler<Configuration> for NixPluginHandler {
     fn plugin_info(&mut self) -> PluginInfo {
         let version = env!("CARGO_PKG_VERSION").to_string();
         PluginInfo {
             name: env!("CARGO_PKG_NAME").to_string(),
             version: version.clone(),
             config_key: "nix".to_string(),
-            help_url: "https://github.com/kachick/dprint-plugin-nixfmt".to_string(),
+            help_url: "https://github.com/kachick/dprint-plugin-nix".to_string(),
             config_schema_url: format!(
-                "https://plugins.dprint.dev/kachick/nixfmt/{}/schema.json",
+                "https://plugins.dprint.dev/kachick/nix/{}/schema.json",
                 version
             ),
-            update_url: Some("https://plugins.dprint.dev/kachick/nixfmt/latest.json".to_string()),
+            update_url: Some("https://plugins.dprint.dev/kachick/nix/latest.json".to_string()),
         }
     }
 
@@ -110,4 +110,4 @@ impl SyncPluginHandler<Configuration> for NixfmtPluginHandler {
 use dprint_core::generate_plugin_code;
 
 #[cfg(target_arch = "wasm32")]
-generate_plugin_code!(NixfmtPluginHandler, NixfmtPluginHandler, Configuration);
+generate_plugin_code!(NixPluginHandler, NixPluginHandler, Configuration);

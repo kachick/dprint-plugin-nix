@@ -24,8 +24,8 @@
           pkgs = nixpkgs.legacyPackages.${system};
         in
         rec {
-          dprint-plugin-nixfmt = pkgs.callPackage ./package.nix { };
-          default = dprint-plugin-nixfmt;
+          dprint-plugin-nix = pkgs.callPackage ./package.nix { };
+          default = dprint-plugin-nix;
         }
       );
 
@@ -36,7 +36,7 @@
         in
         {
           default = pkgs.mkShell {
-            inputsFrom = [ self.packages.${system}.dprint-plugin-nixfmt ];
+            inputsFrom = [ self.packages.${system}.dprint-plugin-nix ];
 
             buildInputs = with pkgs; [
               bashInteractive

@@ -13,7 +13,7 @@ let
   wasmTarget = "wasm32-unknown-unknown";
 in
 rustPlatform.buildRustPackage (finalAttrs: {
-  pname = "dprint-plugin-nixfmt";
+  pname = "dprint-plugin-nix";
   version = with builtins; (fromTOML (readFile ./Cargo.toml)).package.version;
 
   src = lib.fileset.toSource {
@@ -56,7 +56,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
     runHook preInstall
 
     mkdir -p "$out/lib" "$out/share"
-    cp target/${wasmTarget}/release/dprint_plugin_nixfmt.wasm "$out/lib/plugin.wasm"
+    cp target/${wasmTarget}/release/dprint_plugin_nix.wasm "$out/lib/plugin.wasm"
     cp schema.json $out/share/
 
     runHook postInstall
@@ -87,7 +87,7 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   meta = {
     description = "Dprint Wasm plugin for Nix";
-    homepage = "https://github.com/kachick/dprint-plugin-nixfmt";
+    homepage = "https://github.com/kachick/dprint-plugin-nix";
     license = lib.licenses.asl20;
   };
 })

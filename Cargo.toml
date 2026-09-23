@@ -1,5 +1,5 @@
 [package]
-name = "dprint-plugin-nixfmt"
+name = "dprint-plugin-nix"
 version = "0.1.0"
 authors = ["Kenichi Kamiya <kachick1@gmail.com>"]
 edition = "2024"
