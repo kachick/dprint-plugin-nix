@@ -45,6 +45,7 @@
               nixfmt
               nixfmt-tree
               nixd
+              nixf-diagnose
               go-task
               typos
               zizmor

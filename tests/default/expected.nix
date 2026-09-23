@@ -19,5 +19,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
   meta = {
     description = "Dprint Wasm plugin for Nix";
     homepage = "https://github.com/kachick/dprint-plugin-nix";
+    license = lib.licenses.asl20;
   };
 })
