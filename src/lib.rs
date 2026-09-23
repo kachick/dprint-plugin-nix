@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MPL-2.0
+
 use dprint_core::configuration::{
     ConfigKeyMap, GlobalConfiguration, get_unknown_property_diagnostics, get_value,
 };

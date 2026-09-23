@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MPL-2.0
+
 #[cfg(feature = "schema")]
 use schemars::{JsonSchema, schema_for};
 use serde::Serialize;

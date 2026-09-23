@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MPL-2.0
+
 fn main() {
     print!("{}", include_str!(concat!(env!("OUT_DIR"), "/schema.json")));
 }
