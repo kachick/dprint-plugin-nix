@@ -24,12 +24,20 @@ on:
     - cron: '42 1 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   tasks:
+    permissions:
+      id-token: 'write'
+      contents: 'read'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
       - uses: cachix/install-nix-action@ab739621df7a23f52766f9ccc97f38da6b7af14f
         with:
           extra_nix_config: |
@@ -37,6 +45,7 @@ jobs:
             accept-flake-config = true
       - uses: actions/cache@v5
         with:
+          lookup-only: ${{ startsWith(github.ref, 'refs/tags/') }}
           path: |
             ~/.cargo/bin/
             ~/.cargo/registry/index/

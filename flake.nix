@@ -46,6 +46,7 @@
               nixd
               go-task
               typos
+              zizmor
               treefmt
 
               wasm-tools
