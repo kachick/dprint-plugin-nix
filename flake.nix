@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.xz";
   };
 
   outputs =
@@ -16,7 +16,7 @@
       # This project implements a dprint plugin for nixfmt-rs.
       # For its own Nix files, it uses the upstream nixfmt directly to avoid bootstrapping issues
       # and keep the development environment stable without depending on the yet-to-be-built plugin.
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
 
       packages = forAllSystems (
         system:
@@ -43,10 +43,11 @@
               findutils # xargs
               diffutils # for E2E test
               nixfmt
+              nixfmt-tree
               nixd
               go-task
               typos
-              treefmt
+              zizmor
 
               wasm-tools
 
@@ -60,8 +61,13 @@
             ];
 
             env = {
-              CARGO_BUILD_TARGET = "wasm32-unknown-unknown";
+              # Needed for avoiding "error: linker `rust-lld` not found".
+              # Adding packages like binutils is not enough
+              #
+              # https://github.com/NixOS/nixpkgs/issues/70238
               CARGO_TARGET_WASM32_UNKNOWN_UNKNOWN_LINKER = "lld";
+
+              # Workaround for rust-analyzer error
               RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
             };
           };
