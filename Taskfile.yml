@@ -65,7 +65,7 @@ tasks:
       - git ls-files '*.nix' | xargs nixfmt
   lint:
     cmds:
-      - cargo clippy
+      - cargo clippy -- --deny warnings
       - cargo fmt --check
       - dprint check
       - typos . .github

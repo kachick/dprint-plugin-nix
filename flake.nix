@@ -16,7 +16,7 @@
       # This project implements a dprint plugin for nixfmt-rs.
       # For its own Nix files, it uses the upstream nixfmt directly to avoid bootstrapping issues
       # and keep the development environment stable without depending on the yet-to-be-built plugin.
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
+      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
 
       packages = forAllSystems (
         system:
@@ -43,11 +43,11 @@
               findutils # xargs
               diffutils # for E2E test
               nixfmt
+              nixfmt-tree
               nixd
               go-task
               typos
               zizmor
-              treefmt
 
               wasm-tools
 
