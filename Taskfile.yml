@@ -68,7 +68,7 @@ tasks:
       - cargo clippy -- --deny warnings
       - cargo fmt --check
       - dprint check
-      - typos . .github
+      - typos . .github .vscode
       - zizmor .
       # nix fmt doesn't have check: https://github.com/NixOS/nix/issues/6918
       - git ls-files '*.nix' | xargs nixfmt --check
