@@ -2,19 +2,24 @@
 
 [dprint](https://dprint.dev/) WASM plugin for Nix using [nixfmt-rs](https://github.com/Mic92/nixfmt-rs).
 
-## Usage
+## Installation
 
-Add the following to your `dprint.json`:
-
-```json
-{
-  "plugins": [
-    "https://plugins.dprint.dev/kachick/nix-v0.1.0.wasm"
-  ]
-}
+```bash
+dprint config add 'kachick/nix'
 ```
 
 ## Configuration
+
+Empty works as default
+
+```json
+{
+  "nix": {
+  }
+}
+```
+
+Customize if necessary
 
 ```json
 {
@@ -24,6 +29,12 @@ Add the following to your `dprint.json`:
   }
 }
 ```
+
+## Motivation
+
+- I prefer running formatters through dprint WASM plugins
+- [`nix fmt` doesn't have check option](https://github.com/NixOS/nix/issues/6918)
+- nixfmt needs treefmt (nixfmt-tree) to target Nix files in directories
 
 ## Acknowledgments
 
