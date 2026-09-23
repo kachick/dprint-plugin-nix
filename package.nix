@@ -33,23 +33,15 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   nativeBuildInputs = [
     rustc.llvmPackages.bintools # rust-lld
-    yq-go
   ];
 
-  buildPhase = ''
-    runHook preBuild
+  cargoBuildFlags = [
+    "--target=${wasmTarget}"
+    "--package=dprint-plugin-nix"
+  ];
 
-    mkdir -p scripts # Ensure scripts directory exists for the build if not already there
-    # If the script doesn't exist yet, we might need to skip or create a dummy for now
-    if [ -f "$src/scripts/normalize_json_schema.bash" ]; then
-      bash "$src/scripts/normalize_json_schema.bash" > schema.json
-    else
-      # Fallback: run it directly if possible
-      cargo run --package generate_json_schema > schema.json
-    fi
-    cargo build --release --target=${wasmTarget}
-
-    runHook postBuild
+  postBuild = ''
+    cargo run --package=generate_json_schema > schema.json
   '';
 
   installPhase = ''
