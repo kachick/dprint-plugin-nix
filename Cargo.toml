@@ -24,4 +24,4 @@ doctest = false
 
 [workspace]
 resolver = "2"
-members = ["generate_json_schema"]
+members = ["crates/schemagen"]
