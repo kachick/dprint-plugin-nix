@@ -13,10 +13,21 @@
       forAllSystems = lib.genAttrs lib.systems.flakeExposed;
     in
     {
-      # This project implements a dprint plugin for nixfmt-rs.
-      # For its own Nix files, it uses the upstream nixfmt directly to avoid bootstrapping issues
-      # and keep the development environment stable without depending on the yet-to-be-built plugin.
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt-tree);
+      formatter = forAllSystems (
+        system:
+        let
+          pkgs = nixpkgs.legacyPackages.${system};
+        in
+        pkgs.writeShellApplication {
+          name = "dprint-fmt";
+          runtimeInputs = with pkgs; [
+            dprint
+          ];
+          text = ''
+            dprint fmt "$@"
+          '';
+        }
+      );
 
       packages = forAllSystems (
         system:
@@ -42,8 +53,6 @@
               bashInteractive
               findutils # xargs
               diffutils # for E2E test
-              nixfmt
-              nixfmt-tree
               nixd
               nixf-diagnose
               go-task
