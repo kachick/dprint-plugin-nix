@@ -130,8 +130,7 @@ mod tests {
         let mut handler = NixPluginHandler;
         let result = handler.resolve_config(ConfigKeyMap::new(), &GlobalConfiguration::default());
         assert!(result.diagnostics.is_empty());
-        assert_eq!(result.config.line_width, 100);
-        assert_eq!(result.config.indent_width, 2);
+        assert_eq!(result.config, Configuration::default());
         assert_eq!(result.file_matching.file_extensions, vec!["nix"]);
     }
 

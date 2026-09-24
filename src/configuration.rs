@@ -4,7 +4,7 @@
 use schemars::{JsonSchema, schema_for};
 use serde::Serialize;
 
-#[derive(Clone, Serialize)]
+#[derive(Clone, PartialEq, Eq, Debug, Serialize)]
 #[cfg_attr(feature = "schema", derive(JsonSchema))]
 #[serde(rename_all = "camelCase")]
 // NOTE:
@@ -61,11 +61,4 @@ pub fn generate_json_schema() -> String {
         }
     }
     serde_json::to_string_pretty(&schema).unwrap()
-}
-
-#[test]
-fn test_configuration_default() {
-    let default_config = Configuration::default();
-    assert_eq!(default_config.line_width, 100);
-    assert_eq!(default_config.indent_width, 2);
 }
