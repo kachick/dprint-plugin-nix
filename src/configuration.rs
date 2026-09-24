@@ -19,6 +19,16 @@ pub struct Configuration {
     pub indent_width: u8,
 }
 
+impl Default for Configuration {
+    fn default() -> Self {
+        let nixfmt_defaults = nixfmt_rs::Options::default();
+        Self {
+            line_width: nixfmt_defaults.width as u32,
+            indent_width: nixfmt_defaults.indent as u8,
+        }
+    }
+}
+
 #[cfg(feature = "schema")]
 #[must_use]
 pub fn generate_json_schema() -> String {
@@ -37,6 +47,25 @@ pub fn generate_json_schema() -> String {
             "additionalProperties".to_string(),
             serde_json::Value::Bool(false),
         );
+
+        if let Some(properties) = obj.get_mut("properties").and_then(|p| p.as_object_mut()) {
+            if let Ok(serde_json::Value::Object(defaults)) =
+                serde_json::to_value(Configuration::default())
+            {
+                for (key, default_val) in defaults {
+                    if let Some(prop) = properties.get_mut(&key).and_then(|p| p.as_object_mut()) {
+                        prop.insert("default".to_string(), default_val);
+                    }
+                }
+            }
+        }
     }
     serde_json::to_string_pretty(&schema).unwrap()
+}
+
+#[test]
+fn test_configuration_default() {
+    let default_config = Configuration::default();
+    assert_eq!(default_config.line_width, 100);
+    assert_eq!(default_config.indent_width, 2);
 }

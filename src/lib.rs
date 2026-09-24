@@ -40,14 +40,14 @@ impl SyncPluginHandler<Configuration> for NixPluginHandler {
     ) -> PluginResolveConfigurationResult<Configuration> {
         let mut config = config;
         let mut diagnostics = Vec::new();
-        let nixfmt_defaults = nixfmt_rs::Options::default();
+        let default_config = Configuration::default();
 
         let line_width = get_value(
             &mut config,
             "lineWidth",
             global_config
                 .line_width
-                .unwrap_or(nixfmt_defaults.width as u32),
+                .unwrap_or(default_config.line_width),
             &mut diagnostics,
         );
 
@@ -56,7 +56,7 @@ impl SyncPluginHandler<Configuration> for NixPluginHandler {
             "indentWidth",
             global_config
                 .indent_width
-                .unwrap_or(nixfmt_defaults.indent as u8),
+                .unwrap_or(default_config.indent_width),
             &mut diagnostics,
         );
 

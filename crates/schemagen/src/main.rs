@@ -18,6 +18,9 @@ mod tests {
         assert!(!schema.contains(r#""required":"#));
 
         let schema_value: serde_json::Value = serde_json::from_str(schema).unwrap();
+        assert_eq!(schema_value["properties"]["lineWidth"]["default"], 100);
+        assert_eq!(schema_value["properties"]["indentWidth"]["default"], 2);
+
         let validator = jsonschema::validator_for(&schema_value).expect("valid JSON Schema");
 
         let fixture: serde_json::Value =
