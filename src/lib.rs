@@ -84,10 +84,7 @@ impl SyncPluginHandler<Configuration> for NixPluginHandler {
             return Ok(None);
         }
 
-        let text = match std::str::from_utf8(&request.file_bytes) {
-            Ok(text) => text,
-            Err(err) => return Err(FormatError::new(err.to_string())),
-        };
+        let text = std::str::from_utf8(&request.file_bytes)?;
 
         let mut options = nixfmt_rs::Options::default();
         options.width = request.config.line_width as usize;
