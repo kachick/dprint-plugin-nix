@@ -57,15 +57,9 @@ Runs on `nix fmt`, Replace nixfmt-tree with dprint
     let
       pkgs = nixpkgs.legacyPackages.${system};
     in
-    pkgs.writeShellApplication {
-      name = "dprint-fmt";
-      runtimeInputs = with pkgs; [
-        dprint
-      ];
-      text = ''
-        dprint fmt "$@"
-      '';
-    }
+    pkgs.writeShellScriptBin "dprint-fmt" ''
+      exec "${lib.getExe pkgs.dprint}" fmt "$@"
+    ''
   );
 }
 ```
