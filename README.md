@@ -1,5 +1,7 @@
 # dprint-plugin-nix
 
+[![npm version](https://img.shields.io/npm/v/@kachick/dprint-plugin-nix.svg)](https://www.npmjs.com/package/@kachick/dprint-plugin-nix)
+
 [dprint](https://dprint.dev/) WASM plugin for Nix using [nixfmt-rs](https://github.com/Mic92/nixfmt-rs).
 
 ## Installation
