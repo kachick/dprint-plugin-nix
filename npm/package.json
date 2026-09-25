@@ -1,0 +1,28 @@
+{
+  "name": "@kachick/dprint-plugin-nix",
+  "version": "0.1.0",
+  "description": "dprint plugin for Nix formatting using nixfmt",
+  "keywords": [
+    "nix",
+    "nixfmt",
+    "formatter",
+    "dprint",
+    "dprint-plugin"
+  ],
+  "homepage": "https://github.com/kachick/dprint-plugin-nix",
+  "bugs": {
+    "url": "https://github.com/kachick/dprint-plugin-nix/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kachick/dprint-plugin-nix.git"
+  },
+  "license": "MPL-2.0",
+  "author": "Kenichi Kamiya <kachick1@gmail.com>",
+  "files": [
+    "plugin.wasm",
+    "schema.json",
+    "LICENSE",
+    "README.md"
+  ]
+}
