@@ -1,6 +1,6 @@
 # dprint-plugin-nix
 
-[![npm version](https://img.shields.io/npm/v/@kachick/dprint-plugin-nix.svg)](https://www.npmjs.com/package/@kachick/dprint-plugin-nix)
+[![npm version](https://img.shields.io/npm/v/@kachick/dprint-plugin-nix.svg)](https://www.npmjs.com/package/@kachick/dprint-plugin-nix) [![CI - Nix Status](https://github.com/kachick/dprint-plugin-nix/actions/workflows/nix.yml/badge.svg?branch=main)](https://github.com/kachick/dprint-plugin-nix/actions/workflows/nix.yml?query=branch%3Amain+)
 
 [dprint](https://dprint.dev/) WASM plugin for Nix using [nixfmt-rs](https://github.com/Mic92/nixfmt-rs).
 
