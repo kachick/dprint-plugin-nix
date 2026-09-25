@@ -1,6 +1,6 @@
 {
   "name": "@kachick/dprint-plugin-nix",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "dprint plugin for Nix formatting using nixfmt",
   "keywords": [
     "nix",
