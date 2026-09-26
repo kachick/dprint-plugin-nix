@@ -68,7 +68,7 @@ Runs on `nix fmt`, Replace nixfmt-tree with dprint
 
 ## Limitation
 
-Because this plugin is updated after upstream nixfmt and nixfmt_rs, it will lag behind the latest upstream.\
+Because this plugin is updated after upstream nixfmt and nixfmt-rs, it will lag behind the latest upstream.\
 Please do not use it for nixpkgs or [NixOS/](https://github.com/NixOS/) contributions, and use it only in personal repositories.
 
 ## Motivation
