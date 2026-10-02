@@ -14,7 +14,7 @@ description = "dprint plugin for Nix formatting using nixfmt-rs"
 schema = ["dep:schemars"]
 
 [dependencies]
-dprint-core = { version = "0.69.1", features = ["wasm"] }
+dprint-core = { version = "0.70.0", features = ["wasm"] }
 # nixfmt_rs enables the "cli" feature by default, which pulls in native
 # dependencies like mimalloc. Disable default features for the wasm target.
 nixfmt_rs = { version = "0.5.0", default-features = false }
