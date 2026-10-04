@@ -71,6 +71,7 @@ impl SyncPluginHandler<Configuration> for NixPluginHandler {
             file_matching: FileMatchingInfo {
                 file_extensions: vec!["nix".to_string()],
                 file_names: vec![],
+                additive: false,
             },
         }
     }
