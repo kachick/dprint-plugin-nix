@@ -1,0 +1,41 @@
+== formats basic attrset and let expression ==
+{
+lib,
+stdenv
+}:
+let
+foo = "bar";
+in
+stdenv.mkDerivation {
+name = "pkg";
+}
+
+[expect]
+{
+  lib,
+  stdenv,
+}:
+let
+  foo = "bar";
+in
+stdenv.mkDerivation {
+  name = "pkg";
+}
+
+== respects formatting directives ==
+{
+  a   =   1;
+/*nixfmt:disable*/
+  b    =    2;
+/*nixfmt:enable*/
+  c   =   3;
+}
+
+[expect]
+{
+  a = 1;
+/*nixfmt:disable*/
+  b    =    2;
+/*nixfmt:enable*/
+  c = 3;
+}

@@ -28,6 +28,9 @@ run correctly inside the `dprint` CLI:
 The `dprint check` step in each test naturally verifies that fixture `dprint.json`
 files conform to plugin and CLI expectations.
 
+Configuration option variations are covered by spec tests in `tests/specs/`
+(run via `cargo test`) to keep E2E fixtures lightweight and avoid frequent bump churn.
+
 ## Usage
 
 ```sh
