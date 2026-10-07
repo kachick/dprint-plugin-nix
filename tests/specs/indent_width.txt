@@ -1,0 +1,22 @@
+~~ indentWidth: 4 ~~
+== formats with custom indent ==
+{
+lib,
+}:
+let
+foo = "bar";
+in
+{
+inherit foo;
+}
+
+[expect]
+{
+    lib,
+}:
+let
+    foo = "bar";
+in
+{
+    inherit foo;
+}
